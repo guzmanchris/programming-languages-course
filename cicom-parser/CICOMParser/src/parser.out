@@ -1,0 +1,1337 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> term
+Rule 2     exp -> term binop exp
+Rule 3     exp -> IF exp THEN exp ELSE exp
+Rule 4     exp -> LET defrepetitions IN exp
+Rule 5     exp -> MAP idlist TO exp
+Rule 6     defrepetitions -> def
+Rule 7     defrepetitions -> defrepetitions def
+Rule 8     term -> unop term
+Rule 9     term -> factor
+Rule 10    term -> factor ( explist )
+Rule 11    term -> empty
+Rule 12    term -> int
+Rule 13    term -> bool
+Rule 14    factor -> ( exp )
+Rule 15    factor -> prim
+Rule 16    factor -> id
+Rule 17    explist -> propexplist
+Rule 18    explist -> empty
+Rule 19    propexplist -> exp
+Rule 20    propexplist -> exp , propexplist
+Rule 21    idlist -> propidlist
+Rule 22    idlist -> empty
+Rule 23    propidlist -> id
+Rule 24    propidlist -> id , propidlist
+Rule 25    def -> id DEFINE exp ;
+Rule 26    empty -> <empty>
+Rule 27    bool -> BOOL
+Rule 28    unop -> sign
+Rule 29    unop -> ~
+Rule 30    sign -> SIGN
+Rule 31    binop -> sign
+Rule 32    binop -> BINOP
+Rule 33    prim -> PRIM
+Rule 34    id -> ID
+Rule 35    int -> INT
+
+Terminals, with rules where they appear
+
+(                    : 10 14
+)                    : 10 14
+,                    : 20 24
+;                    : 25
+BINOP                : 32
+BOOL                 : 27
+DEFINE               : 25
+ELSE                 : 3
+ID                   : 34
+IF                   : 3
+IN                   : 4
+INT                  : 35
+LET                  : 4
+MAP                  : 5
+PRIM                 : 33
+SIGN                 : 30
+THEN                 : 3
+TO                   : 5
+error                : 
+~                    : 29
+
+Nonterminals, with rules where they appear
+
+binop                : 2
+bool                 : 13
+def                  : 6 7
+defrepetitions       : 4 7
+empty                : 11 18 22
+exp                  : 2 3 3 3 4 5 14 19 20 25 0
+explist              : 10
+factor               : 9 10
+id                   : 16 23 24 25
+idlist               : 5
+int                  : 12
+prim                 : 15
+propexplist          : 17 20
+propidlist           : 21 24
+sign                 : 28 31
+term                 : 1 2 8
+unop                 : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 1
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 1
+
+    (0) S' -> exp .
+
+
+
+state 2
+
+    (1) exp -> term .
+    (2) exp -> term . binop exp
+    (31) binop -> . sign
+    (32) binop -> . BINOP
+    (30) sign -> . SIGN
+
+    $end            reduce using rule 1 (exp -> term .)
+    THEN            reduce using rule 1 (exp -> term .)
+    )               reduce using rule 1 (exp -> term .)
+    ,               reduce using rule 1 (exp -> term .)
+    ELSE            reduce using rule 1 (exp -> term .)
+    ;               reduce using rule 1 (exp -> term .)
+    BINOP           shift and go to state 23
+    SIGN            shift and go to state 18
+
+    binop                          shift and go to state 21
+    sign                           shift and go to state 22
+
+state 3
+
+    (3) exp -> IF . exp THEN exp ELSE exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 24
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 4
+
+    (4) exp -> LET . defrepetitions IN exp
+    (6) defrepetitions -> . def
+    (7) defrepetitions -> . defrepetitions def
+    (25) def -> . id DEFINE exp ;
+    (34) id -> . ID
+
+    ID              shift and go to state 20
+
+    defrepetitions                 shift and go to state 25
+    def                            shift and go to state 26
+    id                             shift and go to state 27
+
+state 5
+
+    (5) exp -> MAP . idlist TO exp
+    (21) idlist -> . propidlist
+    (22) idlist -> . empty
+    (23) propidlist -> . id
+    (24) propidlist -> . id , propidlist
+    (26) empty -> .
+    (34) id -> . ID
+
+    TO              reduce using rule 26 (empty -> .)
+    ID              shift and go to state 20
+
+    idlist                         shift and go to state 28
+    propidlist                     shift and go to state 29
+    empty                          shift and go to state 30
+    id                             shift and go to state 31
+
+state 6
+
+    (8) term -> unop . term
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    unop                           shift and go to state 6
+    term                           shift and go to state 32
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 7
+
+    (9) term -> factor .
+    (10) term -> factor . ( explist )
+
+    BINOP           reduce using rule 9 (term -> factor .)
+    SIGN            reduce using rule 9 (term -> factor .)
+    $end            reduce using rule 9 (term -> factor .)
+    THEN            reduce using rule 9 (term -> factor .)
+    )               reduce using rule 9 (term -> factor .)
+    ,               reduce using rule 9 (term -> factor .)
+    ELSE            reduce using rule 9 (term -> factor .)
+    ;               reduce using rule 9 (term -> factor .)
+    (               shift and go to state 33
+
+
+state 8
+
+    (14) factor -> ( . exp )
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 34
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 9
+
+    (11) term -> empty .
+
+    BINOP           reduce using rule 11 (term -> empty .)
+    SIGN            reduce using rule 11 (term -> empty .)
+    $end            reduce using rule 11 (term -> empty .)
+    THEN            reduce using rule 11 (term -> empty .)
+    )               reduce using rule 11 (term -> empty .)
+    ,               reduce using rule 11 (term -> empty .)
+    ELSE            reduce using rule 11 (term -> empty .)
+    ;               reduce using rule 11 (term -> empty .)
+
+
+state 10
+
+    (12) term -> int .
+
+    BINOP           reduce using rule 12 (term -> int .)
+    SIGN            reduce using rule 12 (term -> int .)
+    $end            reduce using rule 12 (term -> int .)
+    THEN            reduce using rule 12 (term -> int .)
+    )               reduce using rule 12 (term -> int .)
+    ,               reduce using rule 12 (term -> int .)
+    ELSE            reduce using rule 12 (term -> int .)
+    ;               reduce using rule 12 (term -> int .)
+
+
+state 11
+
+    (13) term -> bool .
+
+    BINOP           reduce using rule 13 (term -> bool .)
+    SIGN            reduce using rule 13 (term -> bool .)
+    $end            reduce using rule 13 (term -> bool .)
+    THEN            reduce using rule 13 (term -> bool .)
+    )               reduce using rule 13 (term -> bool .)
+    ,               reduce using rule 13 (term -> bool .)
+    ELSE            reduce using rule 13 (term -> bool .)
+    ;               reduce using rule 13 (term -> bool .)
+
+
+state 12
+
+    (28) unop -> sign .
+
+    ~               reduce using rule 28 (unop -> sign .)
+    (               reduce using rule 28 (unop -> sign .)
+    INT             reduce using rule 28 (unop -> sign .)
+    BOOL            reduce using rule 28 (unop -> sign .)
+    SIGN            reduce using rule 28 (unop -> sign .)
+    PRIM            reduce using rule 28 (unop -> sign .)
+    ID              reduce using rule 28 (unop -> sign .)
+    BINOP           reduce using rule 28 (unop -> sign .)
+    $end            reduce using rule 28 (unop -> sign .)
+    THEN            reduce using rule 28 (unop -> sign .)
+    )               reduce using rule 28 (unop -> sign .)
+    ,               reduce using rule 28 (unop -> sign .)
+    ELSE            reduce using rule 28 (unop -> sign .)
+    ;               reduce using rule 28 (unop -> sign .)
+
+
+state 13
+
+    (29) unop -> ~ .
+
+    ~               reduce using rule 29 (unop -> ~ .)
+    (               reduce using rule 29 (unop -> ~ .)
+    INT             reduce using rule 29 (unop -> ~ .)
+    BOOL            reduce using rule 29 (unop -> ~ .)
+    SIGN            reduce using rule 29 (unop -> ~ .)
+    PRIM            reduce using rule 29 (unop -> ~ .)
+    ID              reduce using rule 29 (unop -> ~ .)
+    BINOP           reduce using rule 29 (unop -> ~ .)
+    $end            reduce using rule 29 (unop -> ~ .)
+    THEN            reduce using rule 29 (unop -> ~ .)
+    )               reduce using rule 29 (unop -> ~ .)
+    ,               reduce using rule 29 (unop -> ~ .)
+    ELSE            reduce using rule 29 (unop -> ~ .)
+    ;               reduce using rule 29 (unop -> ~ .)
+
+
+state 14
+
+    (15) factor -> prim .
+
+    (               reduce using rule 15 (factor -> prim .)
+    BINOP           reduce using rule 15 (factor -> prim .)
+    SIGN            reduce using rule 15 (factor -> prim .)
+    $end            reduce using rule 15 (factor -> prim .)
+    THEN            reduce using rule 15 (factor -> prim .)
+    )               reduce using rule 15 (factor -> prim .)
+    ,               reduce using rule 15 (factor -> prim .)
+    ELSE            reduce using rule 15 (factor -> prim .)
+    ;               reduce using rule 15 (factor -> prim .)
+
+
+state 15
+
+    (16) factor -> id .
+
+    (               reduce using rule 16 (factor -> id .)
+    BINOP           reduce using rule 16 (factor -> id .)
+    SIGN            reduce using rule 16 (factor -> id .)
+    $end            reduce using rule 16 (factor -> id .)
+    THEN            reduce using rule 16 (factor -> id .)
+    )               reduce using rule 16 (factor -> id .)
+    ,               reduce using rule 16 (factor -> id .)
+    ELSE            reduce using rule 16 (factor -> id .)
+    ;               reduce using rule 16 (factor -> id .)
+
+
+state 16
+
+    (35) int -> INT .
+
+    BINOP           reduce using rule 35 (int -> INT .)
+    SIGN            reduce using rule 35 (int -> INT .)
+    $end            reduce using rule 35 (int -> INT .)
+    THEN            reduce using rule 35 (int -> INT .)
+    )               reduce using rule 35 (int -> INT .)
+    ,               reduce using rule 35 (int -> INT .)
+    ELSE            reduce using rule 35 (int -> INT .)
+    ;               reduce using rule 35 (int -> INT .)
+
+
+state 17
+
+    (27) bool -> BOOL .
+
+    BINOP           reduce using rule 27 (bool -> BOOL .)
+    SIGN            reduce using rule 27 (bool -> BOOL .)
+    $end            reduce using rule 27 (bool -> BOOL .)
+    THEN            reduce using rule 27 (bool -> BOOL .)
+    )               reduce using rule 27 (bool -> BOOL .)
+    ,               reduce using rule 27 (bool -> BOOL .)
+    ELSE            reduce using rule 27 (bool -> BOOL .)
+    ;               reduce using rule 27 (bool -> BOOL .)
+
+
+state 18
+
+    (30) sign -> SIGN .
+
+    ~               reduce using rule 30 (sign -> SIGN .)
+    (               reduce using rule 30 (sign -> SIGN .)
+    INT             reduce using rule 30 (sign -> SIGN .)
+    BOOL            reduce using rule 30 (sign -> SIGN .)
+    SIGN            reduce using rule 30 (sign -> SIGN .)
+    PRIM            reduce using rule 30 (sign -> SIGN .)
+    ID              reduce using rule 30 (sign -> SIGN .)
+    BINOP           reduce using rule 30 (sign -> SIGN .)
+    $end            reduce using rule 30 (sign -> SIGN .)
+    IF              reduce using rule 30 (sign -> SIGN .)
+    LET             reduce using rule 30 (sign -> SIGN .)
+    MAP             reduce using rule 30 (sign -> SIGN .)
+    THEN            reduce using rule 30 (sign -> SIGN .)
+    )               reduce using rule 30 (sign -> SIGN .)
+    ,               reduce using rule 30 (sign -> SIGN .)
+    ELSE            reduce using rule 30 (sign -> SIGN .)
+    ;               reduce using rule 30 (sign -> SIGN .)
+
+
+state 19
+
+    (33) prim -> PRIM .
+
+    (               reduce using rule 33 (prim -> PRIM .)
+    BINOP           reduce using rule 33 (prim -> PRIM .)
+    SIGN            reduce using rule 33 (prim -> PRIM .)
+    $end            reduce using rule 33 (prim -> PRIM .)
+    THEN            reduce using rule 33 (prim -> PRIM .)
+    )               reduce using rule 33 (prim -> PRIM .)
+    ,               reduce using rule 33 (prim -> PRIM .)
+    ELSE            reduce using rule 33 (prim -> PRIM .)
+    ;               reduce using rule 33 (prim -> PRIM .)
+
+
+state 20
+
+    (34) id -> ID .
+
+    (               reduce using rule 34 (id -> ID .)
+    BINOP           reduce using rule 34 (id -> ID .)
+    SIGN            reduce using rule 34 (id -> ID .)
+    $end            reduce using rule 34 (id -> ID .)
+    THEN            reduce using rule 34 (id -> ID .)
+    DEFINE          reduce using rule 34 (id -> ID .)
+    ,               reduce using rule 34 (id -> ID .)
+    TO              reduce using rule 34 (id -> ID .)
+    )               reduce using rule 34 (id -> ID .)
+    ELSE            reduce using rule 34 (id -> ID .)
+    ;               reduce using rule 34 (id -> ID .)
+
+
+state 21
+
+    (2) exp -> term binop . exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    term                           shift and go to state 2
+    exp                            shift and go to state 35
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 22
+
+    (31) binop -> sign .
+
+    IF              reduce using rule 31 (binop -> sign .)
+    LET             reduce using rule 31 (binop -> sign .)
+    MAP             reduce using rule 31 (binop -> sign .)
+    ~               reduce using rule 31 (binop -> sign .)
+    (               reduce using rule 31 (binop -> sign .)
+    INT             reduce using rule 31 (binop -> sign .)
+    BOOL            reduce using rule 31 (binop -> sign .)
+    SIGN            reduce using rule 31 (binop -> sign .)
+    PRIM            reduce using rule 31 (binop -> sign .)
+    ID              reduce using rule 31 (binop -> sign .)
+    BINOP           reduce using rule 31 (binop -> sign .)
+    $end            reduce using rule 31 (binop -> sign .)
+    THEN            reduce using rule 31 (binop -> sign .)
+    )               reduce using rule 31 (binop -> sign .)
+    ,               reduce using rule 31 (binop -> sign .)
+    ELSE            reduce using rule 31 (binop -> sign .)
+    ;               reduce using rule 31 (binop -> sign .)
+
+
+state 23
+
+    (32) binop -> BINOP .
+
+    IF              reduce using rule 32 (binop -> BINOP .)
+    LET             reduce using rule 32 (binop -> BINOP .)
+    MAP             reduce using rule 32 (binop -> BINOP .)
+    ~               reduce using rule 32 (binop -> BINOP .)
+    (               reduce using rule 32 (binop -> BINOP .)
+    INT             reduce using rule 32 (binop -> BINOP .)
+    BOOL            reduce using rule 32 (binop -> BINOP .)
+    SIGN            reduce using rule 32 (binop -> BINOP .)
+    PRIM            reduce using rule 32 (binop -> BINOP .)
+    ID              reduce using rule 32 (binop -> BINOP .)
+    BINOP           reduce using rule 32 (binop -> BINOP .)
+    $end            reduce using rule 32 (binop -> BINOP .)
+    THEN            reduce using rule 32 (binop -> BINOP .)
+    )               reduce using rule 32 (binop -> BINOP .)
+    ,               reduce using rule 32 (binop -> BINOP .)
+    ELSE            reduce using rule 32 (binop -> BINOP .)
+    ;               reduce using rule 32 (binop -> BINOP .)
+
+
+state 24
+
+    (3) exp -> IF exp . THEN exp ELSE exp
+
+    THEN            shift and go to state 36
+
+
+state 25
+
+    (4) exp -> LET defrepetitions . IN exp
+    (7) defrepetitions -> defrepetitions . def
+    (25) def -> . id DEFINE exp ;
+    (34) id -> . ID
+
+    IN              shift and go to state 37
+    ID              shift and go to state 20
+
+    def                            shift and go to state 38
+    id                             shift and go to state 27
+
+state 26
+
+    (6) defrepetitions -> def .
+
+    IN              reduce using rule 6 (defrepetitions -> def .)
+    ID              reduce using rule 6 (defrepetitions -> def .)
+
+
+state 27
+
+    (25) def -> id . DEFINE exp ;
+
+    DEFINE          shift and go to state 39
+
+
+state 28
+
+    (5) exp -> MAP idlist . TO exp
+
+    TO              shift and go to state 40
+
+
+state 29
+
+    (21) idlist -> propidlist .
+
+    TO              reduce using rule 21 (idlist -> propidlist .)
+
+
+state 30
+
+    (22) idlist -> empty .
+
+    TO              reduce using rule 22 (idlist -> empty .)
+
+
+state 31
+
+    (23) propidlist -> id .
+    (24) propidlist -> id . , propidlist
+
+    TO              reduce using rule 23 (propidlist -> id .)
+    ,               shift and go to state 41
+
+
+state 32
+
+    (8) term -> unop term .
+
+    BINOP           reduce using rule 8 (term -> unop term .)
+    SIGN            reduce using rule 8 (term -> unop term .)
+    $end            reduce using rule 8 (term -> unop term .)
+    THEN            reduce using rule 8 (term -> unop term .)
+    )               reduce using rule 8 (term -> unop term .)
+    ,               reduce using rule 8 (term -> unop term .)
+    ELSE            reduce using rule 8 (term -> unop term .)
+    ;               reduce using rule 8 (term -> unop term .)
+
+
+state 33
+
+    (10) term -> factor ( . explist )
+    (17) explist -> . propexplist
+    (18) explist -> . empty
+    (19) propexplist -> . exp
+    (20) propexplist -> . exp , propexplist
+    (26) empty -> .
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    )               reduce using rule 26 (empty -> .)
+    BINOP           reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    factor                         shift and go to state 7
+    explist                        shift and go to state 42
+    propexplist                    shift and go to state 43
+    empty                          shift and go to state 44
+    exp                            shift and go to state 45
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 34
+
+    (14) factor -> ( exp . )
+
+    )               shift and go to state 46
+
+
+state 35
+
+    (2) exp -> term binop exp .
+
+    $end            reduce using rule 2 (exp -> term binop exp .)
+    THEN            reduce using rule 2 (exp -> term binop exp .)
+    )               reduce using rule 2 (exp -> term binop exp .)
+    ,               reduce using rule 2 (exp -> term binop exp .)
+    ELSE            reduce using rule 2 (exp -> term binop exp .)
+    ;               reduce using rule 2 (exp -> term binop exp .)
+
+
+state 36
+
+    (3) exp -> IF exp THEN . exp ELSE exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 47
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 37
+
+    (4) exp -> LET defrepetitions IN . exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 48
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 38
+
+    (7) defrepetitions -> defrepetitions def .
+
+    IN              reduce using rule 7 (defrepetitions -> defrepetitions def .)
+    ID              reduce using rule 7 (defrepetitions -> defrepetitions def .)
+
+
+state 39
+
+    (25) def -> id DEFINE . exp ;
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    id                             shift and go to state 15
+    exp                            shift and go to state 49
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+
+state 40
+
+    (5) exp -> MAP idlist TO . exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 50
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 41
+
+    (24) propidlist -> id , . propidlist
+    (23) propidlist -> . id
+    (24) propidlist -> . id , propidlist
+    (34) id -> . ID
+
+    ID              shift and go to state 20
+
+    id                             shift and go to state 31
+    propidlist                     shift and go to state 51
+
+state 42
+
+    (10) term -> factor ( explist . )
+
+    )               shift and go to state 52
+
+
+state 43
+
+    (17) explist -> propexplist .
+
+    )               reduce using rule 17 (explist -> propexplist .)
+
+
+state 44
+
+    (18) explist -> empty .
+    (11) term -> empty .
+
+  ! reduce/reduce conflict for ) resolved using rule 11 (term -> empty .)
+    BINOP           reduce using rule 11 (term -> empty .)
+    SIGN            reduce using rule 11 (term -> empty .)
+    ,               reduce using rule 11 (term -> empty .)
+    )               reduce using rule 11 (term -> empty .)
+
+  ! )               [ reduce using rule 18 (explist -> empty .) ]
+
+
+state 45
+
+    (19) propexplist -> exp .
+    (20) propexplist -> exp . , propexplist
+
+    )               reduce using rule 19 (propexplist -> exp .)
+    ,               shift and go to state 53
+
+
+state 46
+
+    (14) factor -> ( exp ) .
+
+    (               reduce using rule 14 (factor -> ( exp ) .)
+    BINOP           reduce using rule 14 (factor -> ( exp ) .)
+    SIGN            reduce using rule 14 (factor -> ( exp ) .)
+    $end            reduce using rule 14 (factor -> ( exp ) .)
+    THEN            reduce using rule 14 (factor -> ( exp ) .)
+    )               reduce using rule 14 (factor -> ( exp ) .)
+    ,               reduce using rule 14 (factor -> ( exp ) .)
+    ELSE            reduce using rule 14 (factor -> ( exp ) .)
+    ;               reduce using rule 14 (factor -> ( exp ) .)
+
+
+state 47
+
+    (3) exp -> IF exp THEN exp . ELSE exp
+
+    ELSE            shift and go to state 54
+
+
+state 48
+
+    (4) exp -> LET defrepetitions IN exp .
+
+    $end            reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+    THEN            reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+    )               reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+    ,               reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+    ELSE            reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+    ;               reduce using rule 4 (exp -> LET defrepetitions IN exp .)
+
+
+state 49
+
+    (25) def -> id DEFINE exp . ;
+
+    ;               shift and go to state 55
+
+
+state 50
+
+    (5) exp -> MAP idlist TO exp .
+
+    $end            reduce using rule 5 (exp -> MAP idlist TO exp .)
+    THEN            reduce using rule 5 (exp -> MAP idlist TO exp .)
+    )               reduce using rule 5 (exp -> MAP idlist TO exp .)
+    ,               reduce using rule 5 (exp -> MAP idlist TO exp .)
+    ELSE            reduce using rule 5 (exp -> MAP idlist TO exp .)
+    ;               reduce using rule 5 (exp -> MAP idlist TO exp .)
+
+
+state 51
+
+    (24) propidlist -> id , propidlist .
+
+    TO              reduce using rule 24 (propidlist -> id , propidlist .)
+
+
+state 52
+
+    (10) term -> factor ( explist ) .
+
+    BINOP           reduce using rule 10 (term -> factor ( explist ) .)
+    SIGN            reduce using rule 10 (term -> factor ( explist ) .)
+    $end            reduce using rule 10 (term -> factor ( explist ) .)
+    THEN            reduce using rule 10 (term -> factor ( explist ) .)
+    )               reduce using rule 10 (term -> factor ( explist ) .)
+    ,               reduce using rule 10 (term -> factor ( explist ) .)
+    ELSE            reduce using rule 10 (term -> factor ( explist ) .)
+    ;               reduce using rule 10 (term -> factor ( explist ) .)
+
+
+state 53
+
+    (20) propexplist -> exp , . propexplist
+    (19) propexplist -> . exp
+    (20) propexplist -> . exp , propexplist
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 45
+    propexplist                    shift and go to state 56
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 54
+
+    (3) exp -> IF exp THEN exp ELSE . exp
+    (1) exp -> . term
+    (2) exp -> . term binop exp
+    (3) exp -> . IF exp THEN exp ELSE exp
+    (4) exp -> . LET defrepetitions IN exp
+    (5) exp -> . MAP idlist TO exp
+    (8) term -> . unop term
+    (9) term -> . factor
+    (10) term -> . factor ( explist )
+    (11) term -> . empty
+    (12) term -> . int
+    (13) term -> . bool
+    (28) unop -> . sign
+    (29) unop -> . ~
+    (14) factor -> . ( exp )
+    (15) factor -> . prim
+    (16) factor -> . id
+    (26) empty -> .
+    (35) int -> . INT
+    (27) bool -> . BOOL
+    (30) sign -> . SIGN
+    (33) prim -> . PRIM
+    (34) id -> . ID
+
+  ! shift/reduce conflict for SIGN resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    ~               shift and go to state 13
+    (               shift and go to state 8
+    BINOP           reduce using rule 26 (empty -> .)
+    $end            reduce using rule 26 (empty -> .)
+    THEN            reduce using rule 26 (empty -> .)
+    )               reduce using rule 26 (empty -> .)
+    ,               reduce using rule 26 (empty -> .)
+    ELSE            reduce using rule 26 (empty -> .)
+    ;               reduce using rule 26 (empty -> .)
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+    SIGN            shift and go to state 18
+    PRIM            shift and go to state 19
+    ID              shift and go to state 20
+
+  ! SIGN            [ reduce using rule 26 (empty -> .) ]
+
+    exp                            shift and go to state 57
+    term                           shift and go to state 2
+    unop                           shift and go to state 6
+    factor                         shift and go to state 7
+    empty                          shift and go to state 9
+    int                            shift and go to state 10
+    bool                           shift and go to state 11
+    sign                           shift and go to state 12
+    prim                           shift and go to state 14
+    id                             shift and go to state 15
+
+state 55
+
+    (25) def -> id DEFINE exp ; .
+
+    IN              reduce using rule 25 (def -> id DEFINE exp ; .)
+    ID              reduce using rule 25 (def -> id DEFINE exp ; .)
+
+
+state 56
+
+    (20) propexplist -> exp , propexplist .
+
+    )               reduce using rule 20 (propexplist -> exp , propexplist .)
+
+
+state 57
+
+    (3) exp -> IF exp THEN exp ELSE exp .
+
+    $end            reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+    THEN            reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+    )               reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+    ,               reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+    ELSE            reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+    ;               reduce using rule 3 (exp -> IF exp THEN exp ELSE exp .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SIGN in state 0 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 3 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 6 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 8 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 21 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 33 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 36 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 37 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 39 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 40 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 53 resolved as shift
+WARNING: shift/reduce conflict for SIGN in state 54 resolved as shift
+WARNING: reduce/reduce conflict in state 44 resolved using rule (term -> empty)
+WARNING: rejected rule (explist -> empty) in state 44
+WARNING: Rule (explist -> empty) is never reduced
