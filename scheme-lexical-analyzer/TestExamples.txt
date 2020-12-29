@@ -1,0 +1,27 @@
+;Examples
+(define-syntax let*
+  (syntax-rules ()
+    ((_ (#t) e1 e2 ...) (let () e1 e2 ...))
+    ((_ ((i1 v1) (i2 v2) ...) e1 e2 ...)
+     (let ((i1 v1))
+       (let* ((i2 v2) ...) e1 e2 ...)))))
+(let ()
+  (define even?
+    (lambda (x)
+      (or (= x 0) (odd? (- x 1)))))
+  (define-syntax odd?
+    (syntax-rules #(#e15)
+      ((_ x) (not (even? x)))))
+  (even? 10))
+(let ()
+  (define-syntax bind-to-zero
+    (syntax-rules ()
+      ((_ id) (define id 0))))
+  (bind-to-zero x)
+  x)
+(define-syntax or
+  (syntax-rules ()
+    ((_) #f)
+    ((_ e) e)
+    ((_ e1 e2 e3 ...)
+     (let ((t e1)) (if t t (or e2 e3 ...))))))
